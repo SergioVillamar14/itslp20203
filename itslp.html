@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mi perfil</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <link rel="stylesheet" href="css/main_estudiante.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+        
+        <!--Script para la conexion con firebase-->
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>    
+
+	<style>
+	*{
+    	margin: 0;
+    	padding: 0;
+    	box-sizing: border-box;
+    	list-style: none;
+    	font-family: Arial, Helvetica, sans-serif;
+	}
+
+nav{
+    background: #2fcdcd;
+    height: 80px;
+    width: 100%;
+}
+
+.enlace{
+    position: absolute;
+    padding: 20px 50px;
+}
+
+.logo{
+    display: inline-block;
+    height: 40px;
+}
+
+.titulo{
+    height: 40px;
+    position: absolute;
+    padding: 25px 120px;
+    color: purple;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+nav ul li a{
+    color: #fff;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+li a.active, li a:hover{
+    background: #000090;
+    transition: .5s;
+}
+
+.checkbtn{
+    color: #fff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+/*SECTION MAIN HEADER*/
+.main_header{
+    position: relative;
+    width: 98%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #000090;
+    border-radius: 5px;
+}
+
+.materia_sesion{
+    display: inline-block;
+}
+
+.main_header a{
+   float: right;
+   text-decoration: none;
+   color: cadetblue;
+}
+
+.main_header a:hover{
+    color: darkslateblue;
+    transition: .5s;
+ }
+
+.main_header .main_header_titulo{
+    padding: 5px;
+}
+
+ /*SECTION PARA MOSTRAR LAS TABLAS Y DATOS DE LA ACTIVDAD*/
+
+.main_body{
+    width: 98%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #000090;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.tabla{
+    max-height: 40vh;
+    width: 80vw;
+    overflow-y: auto;
+    margin: 15px;
+}
+
+.datos_act{
+    width: 100%;
+    display: flex;
+}
+
+.datos_act .tabla_tareas {
+    border: 1px solid springgreen;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.datos_act .tabla_tareas td, .datos_act .tabla_tareas th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+.datos_act .tabla_tareas tr:nth-child(even){
+    background-color: #f2f2f2;
+    position: sticky;
+}
+  
+.datos_act .tabla_tareas tr:hover {
+    background-color: #ddd;
+}
+  
+.datos_act .tabla_tareas th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.datos_act .datos{
+    width: 45%;
+}
+
+.datos_act .datos .datos_info{
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+}
+
+.datos_act .datos .datos_info img{
+    width: 200px;
+    height: 200px;
+    float: right;
+    margin-right: 60px;
+}
+
+	</style>
+    </head>
+    <body>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <a href="" class="enlace">
+                <img class="logo" src="Imagenes/icono.png" alt="Logo">
+            </a>
+            <h1 class="titulo" style="font-size: 2em;">Practicas de fisica</h1>
+            <ul>
+                <li><a href="" class="active">Inicio</a></li>
+                <li><a href="">Mi biblioteca</a></li>
+                <li><a href="">Videos</a></li>
+                <li><a href="">Cerrar sesion</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div class="main_header">
+                <h2 class="main_header_titulo" style="font-size: 1.8em;">Bienvenido</h2>
+                <h3 class="main_header_titulo" style="font-size: 1.6em;">Materia</h3>
+            </div>
+        </section>
+	<section>
+            <div class="main_body">
+              <h3 style="font-size: 1.4em;">Mis tareas</h3>
+              <div class="datos_act">
+                <div class="tabla">
+                  <table class="tabla_tareas" style="font-size: 1.2em;">
+                    <tr>
+                      <th>Company</th>
+                    </tr>
+                    <tr>
+                      <td>Alfreds Futterkiste</td>
+                    </tr>
+                    <tr>
+                      <td>Berglunds snabbköp</td>
+                    </tr>
+                    <tr>
+                      <td>Centro comercial Moctezuma</td>
+                    </tr>
+                    <tr>
+                      <td>Ernst Handel</td>
+                    </tr>
+                    <tr>
+                      <td>Island Trading</td>
+                    </tr>
+                    <tr>
+                      <td>Königlich Essen</td>
+                    </tr>
+                    <tr>
+                      <td>Laughing Bacchus Winecellars</td>
+                    </tr>
+                    <tr>
+                      <td>Magazzini Alimentari Riuniti</td>
+                    </tr>
+                    <tr>
+                      <td>North/South</td>
+                    </tr>
+                    <tr>
+                      <td>Paris spécialités</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="datos">
+                  <h3 style="font-size: 1.4em;">Datos de la actividad</h3>
+                  </br>
+                  <div class="datos_info" >
+                    <p><img src="https://www.solvetic.com/uploads/monthly_06_2019/tutorials-9832-0-95334300-1560267559.png" alt=""></p>
+                    <p style="font-size: 1.3em;">Nombre de la actividad</p>
+                    <p style="font-size: 1.3em;">Fecha de entrega</p>
+                    <p style="font-size: 1.3em;">Instrucciones de la actividad</p>
+                    <p style="font-size: 1.3em;">Descarga</p>
+                  </div>
+                </div>
+              </div>
+              <h2 style="font-size: 1.4em;">Entregar tarea</h2>
+              <div class="container">
+                <input type="file" id="file-input" accept="image/png, image/jpeg, .pdf" onchange="cargarImagenes()" multiple>
+                <label for="file-input"><i class="fas fa-upload"></i> Seleccionar una imágen</label>
+                <p id="num-de-archivos">No se ha seleccionado ningun archivo</p>
+                <div id="imagenes"></div>
+                <p id="btnSubirArchivos">Subir</p>
+              </div>
+            </div>
+        </section>
+</body>
+</html>
